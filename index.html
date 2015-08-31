@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			js quizer
+		</title>
+		<meta charset="utf-8">
+		<!-- <link rel="icon" href="favicon.ico"> -->
+		<!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> -->
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" href="css/quizerStyle.css">
+		<script src="js/quizerScript.js"></script>
+	</head>
+	<body>
+		<div id="headerWrapper" class="sectionWrapper">
+			<div id="headerTitle" class="sectionTitle">
+				javascript qizer
+			</div>
+			<div id="headerButtons">
+				<div id="startButton" class="button">
+					Start
+				</div>
+				<div id="backToStartButton" class="button">
+					Back to start
+				</div>
+				<div id="finishedButton" class="button">
+					Finish
+				</div>
+			</div>
+		</div>
+		<div id="startPage" class="sectionWrapper">
+			Starting
+			<p>
+			    select quiz to take and press Start
+			</p>
+			<select>
+			    <option value="one">One</option>
+			    <option value="two">Two</option>
+			    <option value="three">Three</option>
+			</select>
+		</div>
+		<div id="quizPage" class="sectionWrapper hideIt">
+			<div id="questionWrapper">
+				<span id="currentQuestionNumber">
+				</span>
+				<span id="currentQuestion">
+				</span>
+			</div>
+
+			<div id="answerWrapper">
+				<div id="answerOne" class="answers"></div>
+				<div id="answerTwo" class="answers"></div>
+				<div id="answerThree" class="answers"></div>
+				<div id="answerFour" class="answers"></div>
+			</div>
+
+			<div id="buttonHolder" class="wrapper">
+				<div id="Prev" class="button lefty">
+					Prev
+				</div>
+				<div id="Next" class="button righty">
+					Next
+				</div>
+			</div>
+
+			<div id="buttonHolder" class="clear wrapper">
+				<span id="numberFinished">
+					# of # completed
+				</span>
+				<!--
+				<div id="Finish" class="button righty">
+					Finish
+				</div>
+				-->
+			</div>
+
+		</div>
+		<div id="finishPage" class="sectionWrapper hideIt">
+			<div id="finishedTitle" class="sectionTitle">
+			    Finished
+			</div>
+			<div id="finishedData">
+				<!--Data goes here-->
+			</div>
+		</div>
+		<div id="footerWrapper" class="sectionWrapper">
+			Footer
+		</div>
+	</body>
+</html>

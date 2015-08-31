@@ -1,0 +1,16 @@
+* { 
+	padding : 5px;
+	margin : 5px;
+	background-color: lightgrey;
+	border : solid limegreen 1px;
+}
+
+.hideIt{
+	display : none;
+	/*visibility:  hidden;*/
+}
+
+.button {
+	display : inline-block;
+	background-color: darkgrey;
+}
