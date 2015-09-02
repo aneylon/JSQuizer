@@ -81,25 +81,28 @@ window.onload = function (){
 
 function StartNewQuiz(){
     // clear / reset all vars.
-    var currentQuestion = 0;
-    var questionsAnswered = 0;
-    var isFinished = false;
+    currentQuestion = 0;
+    questionsAnswered = 0;
+    isFinished = false;
+    userAnswers = new Array(questions.length);
     
-    var userAnswers = new Array(questions.length);
     for ( var i = 0; i < questions.length; i++)
     	userAnswers[i] = null;
+    	
+    DisplayQuestionsAnswered();
+    ResetBackgrounds();
 }
 
 function ShowFinishedPage(){
     if(!isFinished){
         isFinished = true;
         // Show # of questions answered
-        var numberAnswered = questionsAnswered + " of " + questions.length + " answered.";
-    	var para = document.createElement("p");
-    	var node = document.createTextNode(numberAnswered);
-    	para.appendChild(node);
-    	var element = document.getElementById("finishedData");
-    	element.appendChild(para);
+     //   var numberAnswered = questionsAnswered + " of " + questions.length + " answered.";
+    	// var para = document.createElement("p");
+    	// var node = document.createTextNode(numberAnswered);
+    	// para.appendChild(node);
+    	// var element = document.getElementById("finishedData");
+    	// element.appendChild(para);
     	
     	for (var i = 0; i < questions.length; i++ ){
             // Show each question with selected answer and correct answer.
@@ -208,6 +211,7 @@ function UpdateBGColorAndTextColor(ElementID,BGColor,TextColor){
 function DisplayQuestionsAnswered(){
     var bla = questionsAnswered + " of " + questions.length + " answered.";
     SetTextByID("numberFinished",bla);
+    SetTextByID("numberFinishedFinished",bla);
 }
 
 // get questions from json files

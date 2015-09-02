@@ -39,6 +39,20 @@
 	display : inline-block;
 }
 
+#headerTitle {
+	font-size : xx-large;
+	text-align : center;
+}
+
+#headerButtons {
+	margin : auto;
+}
+
+#footerWrapper {
+	font-size : small;
+	text-align : center;
+}
+
 .button {
 	display : inline-block;
 	background-color : darkgray;
