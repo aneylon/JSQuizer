@@ -1,20 +1,20 @@
 var currentQuestion = 0;
 var questionsAnswered = 0;
 var isFinished = false;
-var questions = [
-	{"question":"what color is a banana?","answers":["yellow","orange","red","purple"],"correctAnswer":0},
-	{"question":"one of these things doesn't belong.","answers":["pear","grapes","apple","banana"],"correctAnswer":1},
-	{"question":"five plus six is.","answers":["nine","ten","eleven","twelve"],"correctAnswer":2},
-	{"question":"_____ are dangerous.","answers":["friends","earth worms","kittens","bears"],"correctAnswer":3}
-];
+var questions = "";
+// [
+// 	{"question":"what color is a banana?","answers":["yellow","orange","red","purple"],"correctAnswer":0},
+// 	{"question":"one of these things doesn't belong.","answers":["pear","grapes","apple","banana"],"correctAnswer":1},
+// 	{"question":"five plus six is.","answers":["nine","ten","eleven","twelve"],"correctAnswer":2},
+// 	{"question":"_____ are dangerous.","answers":["friends","earth worms","kittens","bears"],"correctAnswer":3}
+// ];
+var loadedQuestions = "";
 
 var userAnswers = new Array(questions.length);
 for ( var i = 0; i < questions.length; i++)
 	userAnswers[i] = null;
 
 window.onload = function (){
-	RandomizeQuestions();
-	DisplayQuestion(0);
 	
 	document.getElementById("Next").onclick = function() {
 		ShowNextQuestion();
@@ -81,16 +81,23 @@ window.onload = function (){
 
 function StartNewQuiz(){
     // clear / reset all vars.
+    questions = "";
     currentQuestion = 0;
     questionsAnswered = 0;
     isFinished = false;
-    userAnswers = new Array(questions.length);
+    var quizToLoad = document.getElementById("QuizPicker").value;
+	// loadJSON(quizToLoad);
+	GetJSON(quizToLoad);
+	// questions = loadedQuestions;
+	// RandomizeQuestions();
+	// DisplayQuestion(0);
+ //   userAnswers = new Array(questions.length);
     
-    for ( var i = 0; i < questions.length; i++)
-    	userAnswers[i] = null;
+ //   for ( var i = 0; i < questions.length; i++)
+ //   	userAnswers[i] = null;
     	
-    DisplayQuestionsAnswered();
-    ResetBackgrounds();
+ //   DisplayQuestionsAnswered();
+ //   ResetBackgrounds();
 }
 
 function ShowFinishedPage(){
@@ -214,10 +221,67 @@ function DisplayQuestionsAnswered(){
     SetTextByID("numberFinishedFinished",bla);
 }
 
+function GetJSON(fileName){
+	fileName = "./json/"+fileName;
+	$.getJSON ( fileName, function ( data ) {
+		loadedQuestions = data.questions;
+		
+		questions = loadedQuestions;
+		RandomizeQuestions();
+		DisplayQuestion(0);
+	    userAnswers = new Array(questions.length);
+	    
+	    for ( var i = 0; i < questions.length; i++)
+	    	userAnswers[i] = null;
+	    	
+	    DisplayQuestionsAnswered();
+	    ResetBackgrounds();
+	});	
+}
+
+ function loadJSON(fileName){
+    var data_file = "./json/"+ fileName;
+    var http_request = new XMLHttpRequest();
+    var myDatas;
+    try{
+       // Opera 8.0+, Firefox, Chrome, Safari
+       http_request = new XMLHttpRequest();
+    }catch (e){
+       // Internet Explorer Browsers
+       try{
+          http_request = new ActiveXObject("Msxml2.XMLHTTP");
+			
+       }catch (e) {
+		
+          try{
+             http_request = new ActiveXObject("Microsoft.XMLHTTP");
+          }catch (e){
+             // Something went wrong
+             alert("Your browser broke!");
+             return false;
+          }
+			
+       }
+    }
+	
+    http_request.onreadystatechange = function(){
+	
+       if (http_request.readyState == 4  ){
+          // Javascript function JSON.parse to parse JSON data
+          var jsonObj = JSON.parse(http_request.responseText);
+
+          loadedQuestions = jsonObj.questions;
+       }
+    }
+	
+    http_request.open("GET", data_file, true);
+    http_request.send();
+ }
+
 // get questions from json files
 // save answers
 // submit all answers with button
-//  only allow single submission.
+// only allow single submission.
 // disable quiz button after finish.
 // clear data when new quiz starts
 
@@ -234,7 +298,6 @@ function DisplayQuestionsAnswered(){
 
 // extra credit - lessons
 // extra credit - study mode
-
 // backbone
 // meteor
 // node

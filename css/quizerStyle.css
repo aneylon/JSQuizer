@@ -21,6 +21,7 @@
 	margin-bottom : 10px;
 	width : 85%;
 	background-color: #eee;
+	border : solid gray 1px;
 }
 
 #buttonHolder {

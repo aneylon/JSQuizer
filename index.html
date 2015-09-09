@@ -7,8 +7,9 @@
 		<meta charset="utf-8">
 		<!-- <link rel="icon" href="favicon.ico"> -->
 		<!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> -->
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<!--<link rel="icon" type="image/x-icon" href="favicon.ico" />-->
 		<link rel="stylesheet" href="css/quizerStyle.css">
+		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/quizerScript.js"></script>
 	</head>
 	<body>
@@ -21,7 +22,7 @@
 					Start
 				</div>
 				<div id="backToStartButton" class="button">
-					Back to start
+					Back to select
 				</div>
 				<div id="finishedButton" class="button">
 					Finish
@@ -29,14 +30,13 @@
 			</div>
 		</div>
 		<div id="startPage" class="sectionWrapper">
-			Starting
 			<p>
-			    select quiz to take and press Start
+			    Select quiz to take and press Start
 			</p>
-			<select>
-			    <option value="one">One</option>
-			    <option value="two">Two</option>
-			    <option value="three">Three</option>
+			<select id="QuizPicker">
+			    <option value="quiz01.json">One</option>
+			    <option value="quiz02.json">Two</option>
+			    <option value="quiz03.json">Three</option>
 			</select>
 		</div>
 		<div id="quizPage" class="sectionWrapper hideIt">

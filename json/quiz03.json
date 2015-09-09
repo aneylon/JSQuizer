@@ -1,0 +1,8 @@
+{
+    "questions":[
+    	{"question":"what color is a orange?","answers":["yellow","orange","red","purple"],"correctAnswer":1},
+    	{"question":"one of these things doesn't belong.","answers":["pear","grapes","corn","banana"],"correctAnswer":2},
+    	{"question":"seven plus six is.","answers":["thirteen","ten","eleven","twelve"],"correctAnswer":0},
+    	{"question":"_____ are dangerous.","answers":["friends","earth worms","kittens","enemies"],"correctAnswer":3}
+    ]
+}
