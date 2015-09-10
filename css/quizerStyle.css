@@ -96,3 +96,13 @@
 	color : white;*/
 	border : lightgrey solid 1px;
 }
+
+.correct {
+	color : white;
+	background-color : limegreen;
+}
+
+.wrong {
+	color : white;
+	background-color : orangered;
+}

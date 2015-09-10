@@ -2,18 +2,13 @@ var currentQuestion = 0;
 var questionsAnswered = 0;
 var isFinished = false;
 var questions = "";
-// [
-// 	{"question":"what color is a banana?","answers":["yellow","orange","red","purple"],"correctAnswer":0},
-// 	{"question":"one of these things doesn't belong.","answers":["pear","grapes","apple","banana"],"correctAnswer":1},
-// 	{"question":"five plus six is.","answers":["nine","ten","eleven","twelve"],"correctAnswer":2},
-// 	{"question":"_____ are dangerous.","answers":["friends","earth worms","kittens","bears"],"correctAnswer":3}
-// ];
 var loadedQuestions = "";
-
+var userAnswers = [];
+/*
 var userAnswers = new Array(questions.length);
 for ( var i = 0; i < questions.length; i++)
 	userAnswers[i] = null;
-
+*/
 window.onload = function (){
 	
 	document.getElementById("Next").onclick = function() {
@@ -23,11 +18,6 @@ window.onload = function (){
 	document.getElementById("Prev").onclick = function() {
 		ShowPreviousQuestion();
 	}
-/*
-	document.getElementById("Finish").onclick = function(){
-		console.log("Done with this");
-	}
-*/
     document.getElementById("answerOne").onclick = function(){
 		CheckAnswer(1,"answerOne");
 	}
@@ -85,35 +75,35 @@ function StartNewQuiz(){
     currentQuestion = 0;
     questionsAnswered = 0;
     isFinished = false;
+    $("#finishedData").empty();
     var quizToLoad = document.getElementById("QuizPicker").value;
-	// loadJSON(quizToLoad);
 	GetJSON(quizToLoad);
-	// questions = loadedQuestions;
-	// RandomizeQuestions();
-	// DisplayQuestion(0);
- //   userAnswers = new Array(questions.length);
-    
- //   for ( var i = 0; i < questions.length; i++)
- //   	userAnswers[i] = null;
-    	
- //   DisplayQuestionsAnswered();
- //   ResetBackgrounds();
 }
 
 function ShowFinishedPage(){
     if(!isFinished){
         isFinished = true;
-        // Show # of questions answered
-     //   var numberAnswered = questionsAnswered + " of " + questions.length + " answered.";
-    	// var para = document.createElement("p");
-    	// var node = document.createTextNode(numberAnswered);
-    	// para.appendChild(node);
-    	// var element = document.getElementById("finishedData");
-    	// element.appendChild(para);
-    	
-    	for (var i = 0; i < questions.length; i++ ){
-            // Show each question with selected answer and correct answer.
-    	}
+
+		for (var i = 0; i < questions.length; i++ ){
+	        var str = "<div id='questionWrapper'><p class='answers'>Question " + ( i + 1 ) + " : " + questions[i].question + "</p>\n";
+	        var userAnswer = userAnswers[i];
+	        console.log("users answer is : " + userAnswer);
+	        var rightAnswer = questions[i].correctAnswer;
+	        console.log("correct answer is : " + rightAnswer);
+	        var userAnswerText = "Not Answered";
+	        if ( userAnswer != undefined || userAnswer != null || userAnswer == -1 ) {
+	        	userAnswerText = questions[i].answers[userAnswers[i]-1];
+	        }
+	        
+	        if ( userAnswer == rightAnswer ) {
+	        	str += "<p class='answers correct'>User Answer : " + userAnswerText +"</p>\n";
+	        } else {
+	        	str += "<p class='answers wrong'>User Answer : " + userAnswerText +"</p>\n";
+		        str += "<p class='answers correct'>Correct Answer : " + questions[i].answers[questions[i].correctAnswer] + "</p>";	
+	        }
+	        str += "</div>";
+	        $("#finishedData").append(str);
+		}
     }
 }
 
@@ -239,59 +229,11 @@ function GetJSON(fileName){
 	});	
 }
 
- function loadJSON(fileName){
-    var data_file = "./json/"+ fileName;
-    var http_request = new XMLHttpRequest();
-    var myDatas;
-    try{
-       // Opera 8.0+, Firefox, Chrome, Safari
-       http_request = new XMLHttpRequest();
-    }catch (e){
-       // Internet Explorer Browsers
-       try{
-          http_request = new ActiveXObject("Msxml2.XMLHTTP");
-			
-       }catch (e) {
-		
-          try{
-             http_request = new ActiveXObject("Microsoft.XMLHTTP");
-          }catch (e){
-             // Something went wrong
-             alert("Your browser broke!");
-             return false;
-          }
-			
-       }
-    }
-	
-    http_request.onreadystatechange = function(){
-	
-       if (http_request.readyState == 4  ){
-          // Javascript function JSON.parse to parse JSON data
-          var jsonObj = JSON.parse(http_request.responseText);
-
-          loadedQuestions = jsonObj.questions;
-       }
-    }
-	
-    http_request.open("GET", data_file, true);
-    http_request.send();
- }
-
-// get questions from json files
-// save answers
-// submit all answers with button
+// disable start and finish buttons when appropriate.
 // only allow single submission.
-// disable quiz button after finish.
-// clear data when new quiz starts
-
-// check answers
-// display all questions and answers
 
 // animate transitions between questions
 // option to change questions but not see if correct
-// must answer question before continuing
-// must answer all questions before submiting
 // store username and answers
 // cookies to remember and greet
 // timer
